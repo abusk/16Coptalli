@@ -1,5 +1,5 @@
 rootProject.name = 'sholacoptalli'
 
 include 'jars:coptalli'
-include 'wars:sholacoptalliapp'
-include 'wars:sholacoptalliUI'
+//include 'wars:sholacoptalliapp'
+//include 'wars:sholacoptalliUI'
