@@ -1,8 +1,4 @@
-group 'coptalli'
-version 'SNAPSHOT'
-
 apply plugin: 'java'
-apply plugin: 'maven'
 
 repositories {
     mavenCentral()

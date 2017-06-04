@@ -13,4 +13,9 @@ public class CoptalliServicsSingleton extends Application{
     public CoptalliServicsSingleton(){
         singletons.add(new CoptalliServices());
     }
+
+    @Override
+    public Set<Object> getSingletons() {
+        return singletons;
+    }
 }

@@ -1,5 +1,6 @@
 package com.coptalli.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
 public class CPosition {
 
     private String position;
-    private List<String> connectedNodes;
+    private List<String> connectedNodes = new ArrayList<>();
     public CPosition(String pos){
         this.position  = pos;
     }

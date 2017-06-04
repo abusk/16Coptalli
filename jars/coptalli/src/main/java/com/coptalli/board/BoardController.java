@@ -16,7 +16,7 @@ public class BoardController {
     public static Map<String,Board> boards = new HashMap<>();
     public static Map<String, CPosition> allPosition;
 
-    public static String createGame(String playerId, String startPos, String endPos){
+    public static Board createGame(String playerId, String startPos, String endPos){
         String gameId = Utility.creatGameId(playerId);
 
         String [] startxy = startPos.split(",");
@@ -34,14 +34,19 @@ public class BoardController {
         board.setAllPostion(allPosition);
         board.setPlayer1(player1);
         boards.put(gameId,board);
-
-        return null;
+        //showBoard(gameId,playerId);
+        return board;
     }
-
+    public static Map<String, CPosition> createAllPosition(double x1, double y1, double x2, double y2){
+        AllPostion all = new AllPostion();
+        return all.getAllPositions(x1, y1, x2, y2);
+    }
     public static boolean joinGame(String gameId, String playerId){
         Board board = boards.get(gameId);
-        Player player2 = PlayerBoard.createPlayer2(allPosition);
-        board.setPlayer2(player2);
+        if (board.getPlayer2() != null) {
+            Player player2 = PlayerBoard.createPlayer2(allPosition);
+            board.setPlayer2(player2);
+        }
         return true;
     }
 
@@ -58,12 +63,18 @@ public class BoardController {
         return true;
     }
     public static Board showBoard(String gameId, String playerId){
+        Board b = boards.get(gameId);
+        System.out.println(b.getAllPostion());
+        System.out.println(b.getPlayer1().getGuthis());
+        //System.out.println(b.getPlayer2().getGuthis());
         return null;
     }
 
-    public static Map<String, CPosition> createAllPosition(double x1, double y1, double x2, double y2){
-        AllPostion all = new AllPostion();
-        return all.getAllPositions(x1, y1, x2, y2);
+    public static void main(String[] args) {
+
+        createGame("abu24","50,150","500,600");
+
     }
+
 
 }
