@@ -4,6 +4,8 @@ import com.coptalli.board.BoardController;
 import com.coptalli.model.Board;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 /**
@@ -27,11 +29,22 @@ public class CoptalliServices {
     }
 
     @GET
-    @Path("/createGame/{playerId}")
-    public Board createGame(@PathParam("playerId") String playerId){
-        return BoardController.createGame(playerId, "50,150","500,600");
+    @Path("/createGame/{userId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String createGame(@PathParam("userId") String userId){
+        return BoardController.createGame(userId, "50,150","500,600");
     }
-
+    @GET
+    @Path("/joinGame/{gameId}/{userId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String joinGame(@PathParam("gameId") String gameId, @PathParam("userId") String userId){
+        return BoardController.joinGame(gameId,userId);
+    }
+    @GET
+    @Path("/play/{gameId}/{playerId}")
+    public Board play(@PathParam("gameId") String gameId, @PathParam("playerId") String playerId){
+        return BoardController.play(gameId, playerId);
+    }
     @GET
     @Path("/move")
     public boolean move(){

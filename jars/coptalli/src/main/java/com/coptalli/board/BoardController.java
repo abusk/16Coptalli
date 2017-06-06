@@ -14,10 +14,9 @@ import java.util.Map;
  */
 public class BoardController {
     public static Map<String,Board> boards = new HashMap<>();
-    public static Map<String, CPosition> allPosition;
 
-    public static Board createGame(String playerId, String startPos, String endPos){
-        String gameId = Utility.creatGameId(playerId);
+    public static String createGame(String userId, String startPos, String endPos){
+        String gameId = Utility.creatGameId(userId);
 
         String [] startxy = startPos.split(",");
         String [] endxy = endPos.split(",");
@@ -26,31 +25,35 @@ public class BoardController {
         double y1 = Double.parseDouble(startxy[1]);
         double x2 = Double.parseDouble(endxy[0]);
         double y2 = Double.parseDouble(endxy[1]);
-        allPosition = createAllPosition(x1, y1, x2, y2);
-        Player player1 = PlayerBoard.createPlayer1(allPosition);
-
+        Map<String, CPosition> allPosition  = createAllPosition(x1, y1, x2, y2);
+        Player player1 = PlayerBoard.createPlayer1(allPosition, userId);
         Board board = new Board();
         board.setGameId(gameId);
         board.setAllPostion(allPosition);
         board.setPlayer1(player1);
-        boards.put(gameId,board);
-        //showBoard(gameId,playerId);
-        return board;
+        boards.put(gameId, board);
+        return gameId;
     }
     public static Map<String, CPosition> createAllPosition(double x1, double y1, double x2, double y2){
         AllPostion all = new AllPostion();
         return all.getAllPositions(x1, y1, x2, y2);
     }
-    public static boolean joinGame(String gameId, String playerId){
+    public static String joinGame(String gameId, String userId){
         Board board = boards.get(gameId);
-        if (board.getPlayer2() != null) {
-            Player player2 = PlayerBoard.createPlayer2(allPosition);
-            board.setPlayer2(player2);
+        if(board != null) {
+            if (board.getPlayer2() == null) {
+                Player player2 = PlayerBoard.createPlayer2(board.getAllPostion(), userId);
+                board.setPlayer2(player2);
+                return board.getPlayer1().getUserId();
+            }
+            else
+                return null;
         }
-        return true;
+        else
+            return null;
     }
 
-    public static boolean login(String payerId, String password){
+    public static boolean login(String userId, String password){
         return true;
     }
     public static boolean signup(PlayerInfo info){
@@ -62,19 +65,9 @@ public class BoardController {
     public static boolean jump(String gameId, String playerId, String toPosition, String fromPosition, String jumpPosition){
         return true;
     }
-    public static Board showBoard(String gameId, String playerId){
+    public static Board play(String gameId, String playerId){
         Board b = boards.get(gameId);
-        System.out.println(b.getAllPostion());
-        System.out.println(b.getPlayer1().getGuthis());
-        //System.out.println(b.getPlayer2().getGuthis());
-        return null;
+        return b;
     }
-
-    public static void main(String[] args) {
-
-        createGame("abu24","50,150","500,600");
-
-    }
-
 
 }

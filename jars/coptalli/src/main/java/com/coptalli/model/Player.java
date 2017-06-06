@@ -8,7 +8,14 @@ import java.util.List;
 public class Player {
     private String payerId;
     private List<Guthi> guthis;
+    private String userId;
 
+    public String getUserId() {
+        return userId;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
     public String getPayerId() {
         return payerId;
     }

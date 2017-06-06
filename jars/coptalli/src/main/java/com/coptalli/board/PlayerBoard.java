@@ -14,15 +14,17 @@ import java.util.Map;
 public class PlayerBoard {
 
 
-    public static Player createPlayer1(Map<String,CPosition> allPosition){
+    public static Player createPlayer1(Map<String,CPosition> allPosition, String userId){
         Player player = new Player();
         player.setPayerId("player1");
+        player.setUserId(userId);
         player.setGuthis(createPlayerGuthis("player1",1,allPosition));
         return player;
     }
-    public static Player createPlayer2(Map<String,CPosition> allPosition){
+    public static Player createPlayer2(Map<String,CPosition> allPosition, String userId){
         Player player = new Player();
         player.setPayerId("player2");
+        player.setUserId(userId);
         player.setGuthis(createPlayerGuthis("player2",17,allPosition));
         return player;
     }
