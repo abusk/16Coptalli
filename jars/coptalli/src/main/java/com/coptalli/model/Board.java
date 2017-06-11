@@ -9,6 +9,16 @@ public class Board {
     private String gameId;
     private Player player1;
     private Player player2;
+    private GameStatus gameStatus;
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
     private Map<String, CPosition> allPostion;
 
     public Map<String, CPosition> getAllPostion() {

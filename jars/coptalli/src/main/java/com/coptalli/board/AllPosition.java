@@ -239,7 +239,6 @@ public class AllPosition {
         String pos16 = "c" + i++;
         cpos16.setPositionId(pos16);
         allPosition.put(pos16, cpos16);
-
     }
 
     public static void main(String[] args) {

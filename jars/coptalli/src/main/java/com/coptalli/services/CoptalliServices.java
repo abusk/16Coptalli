@@ -2,6 +2,7 @@ package com.coptalli.services;
 
 import com.coptalli.board.BoardController;
 import com.coptalli.model.Board;
+import com.coptalli.model.GameStatus;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -49,7 +50,7 @@ public class CoptalliServices {
     }
     @POST
     @Path("/move/{gameId}/{playerId}/{startPos}/{endPos}")
-    public Board move(@PathParam("gameId") String gameId
+    public GameStatus move(@PathParam("gameId") String gameId
                         , @PathParam("playerId") String playerId
                         , @PathParam("startPos") String startPos
                         , @PathParam("endPos") String endPos

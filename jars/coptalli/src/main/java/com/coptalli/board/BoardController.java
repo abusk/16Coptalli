@@ -1,7 +1,9 @@
 package com.coptalli.board;
 
 import com.coptalli.model.*;
+import com.coptalli.util.GameState;
 import com.coptalli.util.Utility;
+import com.sun.xml.bind.v2.TODO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,33 +93,62 @@ public class BoardController {
      * @param toBeDeleted
      * @return
      */
-    public static Board move(String gameId, String playerId, String startPos, String endPos, List<String> toBeDeleted){
+    public static GameStatus move(String gameId, String playerId, String startPos, String endPos, List<String> toBeDeleted){
         Board board = boards.get(gameId);
+        GameStatus status = board.getGameStatus();
         List<Guthi> guthiList;
         if (board != null){
             Player player1;
             Player player2;
             if (playerId.equals("player1")){
+                status.setLock("player2");
                 player1 = board.getPlayer1();
                 guthiList = player1.getGuthis();
                 player1.setGuthis(replaceGuthi(gameId, "player1", startPos, endPos,guthiList));
                 player2 = board.getPlayer2();
-                if (!toBeDeleted.isEmpty())
+                if (!toBeDeleted.isEmpty()){
                     player2.setGuthis(deleteGuthis(gameId,"player2",toBeDeleted));
+                }
+
+                if (player2.getGuthis().isEmpty()) {
+                    status.setPlayer(playerId);
+                    status.setStatus(GameState.WIN);
+                }
+                else if (playerId.equals("draw game")){ //Change condition also
+                    //TODO : draw game
+                }
+                else {
+                    status.setPlayer(playerId);
+                    status.setStatus(GameState.RUNNING);
+                }
             }
             else {
+                status.setLock("player1");
                 player2 = board.getPlayer2();
                 guthiList = player2.getGuthis();
                 player2.setGuthis(replaceGuthi(gameId, "player2", startPos, endPos,guthiList));
                 player1 = board.getPlayer1();
                 if (!toBeDeleted.isEmpty())
                     player1.setGuthis(deleteGuthis(gameId,"player1",toBeDeleted));
+
+                if (player1.getGuthis().isEmpty()) {
+                    status.setPlayer(playerId);
+                    status.setStatus(GameState.WIN);
+                }
+                else if (playerId.equals("draw game")){
+                    //TODO : draw game
+                }
+                else {
+                    status.setPlayer(playerId);
+                    status.setStatus(GameState.RUNNING);
+                }
             }
             board.setPlayer1(player1);
             board.setPlayer2(player2);
+            board.setGameStatus(status);
             boards.put(gameId,board);
         }
-        return board;
+        return board.getGameStatus();
     }
 
     /**
@@ -188,6 +219,16 @@ public class BoardController {
      */
     public static Board play(String gameId, String playerId){
         Board b = boards.get(gameId);
+        GameStatus status = new GameStatus();
+        if (playerId.equals("player1"))
+            status.setLock("player2");
+        else
+            status.setLock("player1");
+
+        status.setPlayer(playerId);
+        status.setStatus(GameState.RUNNING);
+        b.setGameStatus(status);
+        boards.put(gameId,b);
         return b;
     }
 
