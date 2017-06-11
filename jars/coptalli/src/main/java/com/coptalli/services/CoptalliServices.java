@@ -7,6 +7,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by abu on 30/4/17.
@@ -32,7 +34,7 @@ public class CoptalliServices {
     @Path("/createGame/{userId}")
     @Produces(MediaType.TEXT_PLAIN)
     public String createGame(@PathParam("userId") String userId){
-        return BoardController.createGame(userId, "50,150","500,600");
+        return BoardController.createGame(userId, "50,500","150,600");
     }
     @GET
     @Path("/joinGame/{gameId}/{userId}")
@@ -45,9 +47,14 @@ public class CoptalliServices {
     public Board play(@PathParam("gameId") String gameId, @PathParam("playerId") String playerId){
         return BoardController.play(gameId, playerId);
     }
-    @GET
-    @Path("/move")
-    public boolean move(){
-        return true;
+    @POST
+    @Path("/move/{gameId}/{playerId}/{startPos}/{endPos}")
+    public Board move(@PathParam("gameId") String gameId
+                        , @PathParam("playerId") String playerId
+                        , @PathParam("startPos") String startPos
+                        , @PathParam("endPos") String endPos
+                        , List<String> toBeDeleted){
+
+        return BoardController.move(gameId,playerId,startPos,endPos,toBeDeleted);
     }
 }

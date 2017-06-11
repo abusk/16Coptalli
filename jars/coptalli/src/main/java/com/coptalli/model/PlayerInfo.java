@@ -4,17 +4,17 @@ package com.coptalli.model;
  * Created by abu on 7/5/17.
  */
 public class PlayerInfo {
-    private String playerId;
+    private String userId;
     private String emailId;
     private String fullName;
     private String password;
 
-    public String getPlayerId() {
-        return playerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setPlayerId(String playerId) {
-        this.playerId = playerId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getEmailId() {

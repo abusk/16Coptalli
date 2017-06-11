@@ -1,7 +1,5 @@
 package com.coptalli.model;
 
-import com.coptalli.board.AllPostion;
-
 import java.util.Map;
 
 /**
