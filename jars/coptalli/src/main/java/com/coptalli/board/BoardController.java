@@ -5,10 +5,7 @@ import com.coptalli.util.GameState;
 import com.coptalli.util.Utility;
 import com.sun.xml.bind.v2.TODO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by abu on 7/5/17.
@@ -32,6 +29,13 @@ public class BoardController {
      */
     public static String createGame(String userId, String startPos, String endPos){
         String gameId = Utility.creatGameId(userId);
+        Set<String> keySet = boards.keySet();
+        for (String gId : keySet) {
+            if (userId.equals(gId.split("-")[0])){
+                boards.remove(gId);
+                break;
+            }
+        }
 
         String [] startxy = startPos.split(",");
         String [] endxy = endPos.split(",");
@@ -46,6 +50,12 @@ public class BoardController {
         board.setGameId(gameId);
         board.setAllPostion(allPosition);
         board.setPlayer1(player1);
+
+        GameStatus status = new GameStatus();
+        status.setStatus(GameState.CREATED);
+        status.setPlayer("player1");
+        status.setLock("player1");
+        board.setGameStatus(status);
         boards.put(gameId, board);
         return gameId;
     }
@@ -75,6 +85,11 @@ public class BoardController {
             if (board.getPlayer2() == null) {
                 Player player2 = PlayerBoard.createPlayer2(board.getAllPostion(), userId);
                 board.setPlayer2(player2);
+                GameStatus status = new GameStatus();
+                status.setStatus(GameState.READY);
+                status.setPlayer("player2");
+                status.setLock("player2");
+                board.setGameStatus(status);
                 return board.getPlayer1().getUserId();
             }
             else
@@ -230,6 +245,16 @@ public class BoardController {
         b.setGameStatus(status);
         boards.put(gameId,b);
         return b;
+    }
+
+    /**
+     *
+     * @param gameId
+     * @return
+     */
+    public static int state(String gameId){
+        Board b = boards.get(gameId);
+        return b.getGameStatus().getStatus().state();
     }
 
 }

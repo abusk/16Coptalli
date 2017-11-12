@@ -7,6 +7,7 @@ public class Guthi {
     private CPosition gCPosition;
     private String guthiId;
     private String playerId;
+    private 
 
 
     public Guthi(String guthiId, String playerId, CPosition cPosition){

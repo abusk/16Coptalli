@@ -1,13 +1,11 @@
 package com.coptalli.util;
 
-import com.coptalli.model.GameStatus;
-
 /**
  * Created by taleb on 6/11/17.
  */
 public enum GameState {
 
-    RUNNING(0), WIN(1), DRAW(2);
+    CREATED(0), READY(1), RUNNING(2), WIN(3), DRAW(4);
 
     private int state;
 

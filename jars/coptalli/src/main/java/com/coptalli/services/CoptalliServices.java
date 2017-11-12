@@ -58,4 +58,9 @@ public class CoptalliServices {
 
         return BoardController.move(gameId,playerId,startPos,endPos,toBeDeleted);
     }
+    @GET
+    @Path("/state/{gameId}")
+    public int play(@PathParam("gameId") String gameId){
+        return BoardController.state(gameId);
+    }
 }

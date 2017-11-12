@@ -2,3 +2,7 @@ build/
 .idea
 .gradle
 node_modules
+typings
+*.js
+*.map
+_dist/
