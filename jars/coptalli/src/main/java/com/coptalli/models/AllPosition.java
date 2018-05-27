@@ -1,6 +1,4 @@
-package com.coptalli.board;
-
-import com.coptalli.model.CPosition;
+package com.coptalli.model;
 
 import java.util.HashMap;
 import java.util.Map;

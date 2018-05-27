@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>sholacoptali</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/login.js"></script>
+<script src="./js/menu.js"></script>
+  <script type="text/javascript">
+    var ready = "false";
+  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style="color: green">SholaCoptali</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><label id = "user-id">Abu24</label></a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#" id = "play-with-computer">Play with Computer</a></li>
+        <li role="presentation"><a href="#" id = "play-with-human">Play with Human</a></li>
+      </ul>
+      <ul class="list-group" id="computer" style="display: block;">
+        <li class="list-group-item"><a href = "">Easy</a></li>
+        <li class="list-group-item"><a href = "">Intermediate</a></li>
+        <li class="list-group-item"><a href = "">Hard</a></li>
+      </ul>
+      <ul class="list-group" id="human" style="display: none;">
+        <li class="list-group-item">
+          <button type="button" class="btn btn-primary" id="createGame">
+          Create Game
+          </button>
+          <label id="lGId"></label>
+        </li>
+        <li class="list-group-item">
+          <button type="button" class="btn btn-primary" id="joinGame">
+          Join Game
+          </button>
+          <input type="text" id="joinId" name="join">
+        </li>
+        <li class="list-group-item">
+          <button type="button" class="btn btn-primary" id="searchplayer">
+          Select Random Player
+          </button>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-primary" id = "playButton" disabled="true" onclick="play()">
+      Play
+      </button>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+</body>
+</html>

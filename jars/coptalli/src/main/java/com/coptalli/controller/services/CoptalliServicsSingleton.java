@@ -11,7 +11,7 @@ public class CoptalliServicsSingleton extends Application{
     private Set<Object> singletons = new HashSet<>();
 
     public CoptalliServicsSingleton(){
-        singletons.add(new CoptalliServices());
+        singletons.add(new CoptaliUserServices());
     }
 
     @Override
